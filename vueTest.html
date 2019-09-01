@@ -5,15 +5,18 @@
     </head>
     <body>
         <div id="app">    
-                <div>{{message}} </div>
-            <input type="text" v-model="message" />
+                <h1 v-if="visible"> 나는 보입니다 </h1>
+                    <!-- 처리 하지 않음 -->
+                <h1 v-show="visible"> 나는 보입니다 </h1>
+                    <!-- 처리를 모두 하지만 diplay만 none으로 표시  -->
+            
         </div>
         <script src="https://cdn.jsdelivr.net/npm/vue"></script>
         <script>
             var firstApp= new Vue({
                 el: '#app',
                 data : {
-                    message : '첫 번째'
+                    visible : false
                 }
             });
         </script>
