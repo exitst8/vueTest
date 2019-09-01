@@ -5,10 +5,26 @@
     </head>
     <body>
         <div id="app">    
-                <h1 v-if="visible"> 나는 보입니다 </h1>
-                    <!-- 처리 하지 않음 -->
-                <h1 v-show="visible"> 나는 보입니다 </h1>
-                    <!-- 처리를 모두 하지만 diplay만 none으로 표시  -->
+                <ul>
+                    <li v-for="n in numbers">
+                                {{n}}
+                    </li>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>이름</th>
+                                <th>나이</th>
+                            </tr>
+                        </thead>
+                        <tbody v-for ="p in peaple" v-if="p.age <= 30">
+                            <tr>
+                                <td>{{p.name}}</td>
+                                <td>{{p.age}}</td>
+                            </tr>
+                        </tbody>
+
+                    </table>
+                </ul>
             
         </div>
         <script src="https://cdn.jsdelivr.net/npm/vue"></script>
@@ -16,7 +32,21 @@
             var firstApp= new Vue({
                 el: '#app',
                 data : {
-                    visible : false
+                    numbers : [1,2,3,4,5,6,7,8,9,10],
+                    peaple : [
+                        {
+                            name : '이순신',
+                            age : 10
+                        },
+                        {
+                            name : '김두한',
+                            age : 20
+                        },
+                        {
+                            name : '신사임당',
+                            age : 40
+                        }
+                    ]
                 }
             });
         </script>
