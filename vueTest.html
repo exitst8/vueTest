@@ -5,48 +5,58 @@
     </head>
     <body>
         <div id="app">    
-                <ul>
-                    <li v-for="n in numbers">
-                                {{n}}
-                    </li>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>이름</th>
-                                <th>나이</th>
-                            </tr>
-                        </thead>
-                        <tbody v-for ="p in peaple" v-if="p.age <= 30">
-                            <tr>
-                                <td>{{p.name}}</td>
-                                <td>{{p.age}}</td>
-                            </tr>
-                        </tbody>
 
-                    </table>
-                </ul>
-            
+                <h1 v-if="visible">나는 보입니다</h1>
+                <button v-on:click="visible = !visible">visible 버튼</button>
+                <hr/>
+
+                <button v-on:click="alert('버튼을 클릭했습니다')">버튼</button>
+                <hr/>
+                <button v-on:dblclick="alert('더블 클릭했습니다')">더블 클릭 버튼</button>
+                 
+
+                 <hr/>
+                 <button v-on:click="add()">추가 버튼</button>
+                 <ul>
+                    <li v-for="n in numbers">
+
+                            {{n}}
+                    </li>
+
+                 </ul>
+
+
+                 <hr/>
+                 <input type="text" v-on:keyup.enter="capture()" v-model="animal" name="" id="">
+                 <ul>
+                     <li v-for="a in animals"> {{a}} </li>
+                 </ul>
+
         </div>
         <script src="https://cdn.jsdelivr.net/npm/vue"></script>
         <script>
             var firstApp= new Vue({
                 el: '#app',
                 data : {
-                    numbers : [1,2,3,4,5,6,7,8,9,10],
-                    peaple : [
-                        {
-                            name : '이순신',
-                            age : 10
-                        },
-                        {
-                            name : '김두한',
-                            age : 20
-                        },
-                        {
-                            name : '신사임당',
-                            age : 40
+
+                    visible : true ,
+                    numbers : [1,2,3,4,5],
+                    animal :  null,
+                    animals : ['lion','tiger','dog','cat']
+                },
+                methods :{
+                    add : function(){
+                        var lastNum = this.numbers[this.numbers.length -1];
+                        lastNum += 1;
+                        this.numbers.push(lastNum);
+
+                    },
+                    capture :function(){
+                        if(this.animal){
+                        this.animals.push(this.animal)
+                        this.animal= null
                         }
-                    ]
+                    }
                 }
             });
         </script>
