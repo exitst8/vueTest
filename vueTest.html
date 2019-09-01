@@ -1,50 +1,32 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <title>메모 앱</title>
         <meta charset="utf-8"/>
-        <style>
-            button{
-                background: white;
-                border :  1px, solid gray;
-                margin:  0 5px;
-                cursor: pointer;
-
-            }
-            button.active{
-                background: blue;
-                color: white;
-                border-color: white;
-            }
-            img{
-                width: 500px;
-                height: 300px;
-            }
-        </style>
+        <meta name="viewport" content="width=device-width, user-scalable=no">
+        <link href="https://necolas.github.io/normalize.css/8.0.1/normallize.css" rel="stylesheet"/>
+        <link href="app.css" rel="stylesheet"/>
+        
     </head>
     <body>
-        <div id="app">    
-
-                <button v-for="p in pages" v-bind:class="{ 'active' : page === p }" v-on:click="page = p"> {{p}}</button>
-                <hr/>
-                <div v-for="p in pages" v-if="page === p">
-                    <p>
-                        {{p}} contents
-                    </p>
-                    <img v-bind:src="'img/' + p + '.jpg'">
+        <div id="app" class="app">
+            <div class="head"> 메모 앱 </div>
+            <div class="body">
+                <div class="list" v-if="mode === 'list'">
+                    <ul>
+                        <li v-for="m in memos">{{m.content}}</li>
+                    </ul>
                 </div>
-                
+                <div class="write" v-else>
+                    <textarea v-model="memo.centent">
+                    </textarea>
+                    <button class="save-btn" type="button" v-on:click="save()">저장</button>
+                    <button class="cancel-btn" type="button" v-on:click="cancel()">취소</button>
+                </div>
+                <button type="button" class="add-btn" v-on:click="write()" v-if="mode === 'list'"> + </button>
+            </div>            
         </div>
         <script src="https://cdn.jsdelivr.net/npm/vue"></script>
-        <script>
-            var firstApp= new Vue({
-                el: '#app',
-                data : {
-                    button : 'button',
-                    page : 'page2',
-                    pages : [ 'page1','page2','page3','page4']
-                  
-                }
-            });
-        </script>
+        <script src="app.js"> </script>
     </body>
 </html>
